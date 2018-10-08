@@ -43,6 +43,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var BasePage = (function () {
+    function BasePage() {
+    }
+    return BasePage;
+}());
+__reflect(BasePage.prototype, "BasePage", ["IGamePage"]);
 //////////////////////////////////////////////////////////////////////////////////////
 //
 //  Copyright (c) 2014-present, Egret Technology.
@@ -92,6 +98,133 @@ var LoadingUI = (function (_super) {
     return LoadingUI;
 }(egret.Sprite));
 __reflect(LoadingUI.prototype, "LoadingUI", ["RES.PromiseTaskReporter"]);
+var DebugPlatform = (function () {
+    function DebugPlatform() {
+    }
+    DebugPlatform.prototype.getUserInfo = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, { nickName: "username" }];
+            });
+        });
+    };
+    DebugPlatform.prototype.login = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/];
+            });
+        });
+    };
+    return DebugPlatform;
+}());
+__reflect(DebugPlatform.prototype, "DebugPlatform", ["Platform"]);
+if (!window.platform) {
+    window.platform = new DebugPlatform();
+}
+var BaseElement = (function () {
+    function BaseElement() {
+    }
+    return BaseElement;
+}());
+__reflect(BaseElement.prototype, "BaseElement");
+var Element_Monster = (function () {
+    function Element_Monster() {
+    }
+    return Element_Monster;
+}());
+__reflect(Element_Monster.prototype, "Element_Monster");
+var Element_Player = (function () {
+    function Element_Player() {
+    }
+    return Element_Player;
+}());
+__reflect(Element_Player.prototype, "Element_Player");
+var Element_Weapon = (function () {
+    function Element_Weapon() {
+    }
+    return Element_Weapon;
+}());
+__reflect(Element_Weapon.prototype, "Element_Weapon");
+var GameGlobal = (function () {
+    function GameGlobal() {
+    }
+    GameGlobal.init = function (main) {
+        if (main) {
+            GameGlobal.mainLayer = main;
+        }
+        GameGlobal.curState = GameGlobal.state_gameWait;
+        GameGlobal.pageMap = {};
+    };
+    GameGlobal.register = function (key, page) {
+        if (!GameGlobal.pageMap[key]) {
+            GameGlobal.pageMap[key] = page;
+        }
+    };
+    GameGlobal.update = function () {
+        // if (GameGlobal.curState == GameGlobal.state_gameWait) {
+        // 	GameGlobal.mainLayer.addChild(GameGlobal.page_main);
+        // } else if (GameGlobal.curState == GameGlobal.state_gameReady) {
+        // 	GameGlobal.gdMgr.initData();
+        // 	GameGlobal.mainLayer.addChild(GameGlobal.page_ready);
+        // 	GameGlobal.page_ready.onOpenHandler();
+        // } else if (GameGlobal.curState == GameGlobal.state_gamePlaying) {
+        // } else if (GameGlobal.curState == GameGlobal.state_gameOver) {
+        // 	GameGlobal.mainLayer.addChild(GameGlobal.page_over);
+        // 	GameGlobal.page_over.onOpenHandler();
+        // }
+    };
+    GameGlobal.activateReadyPage = function () {
+        // GameGlobal.page_ready.touchChildren = true;
+        // GameGlobal.page_ready.touchEnabled = true;
+    };
+    GameGlobal.disableReadyPage = function () {
+        // GameGlobal.page_ready.touchChildren = false;
+        // GameGlobal.page_ready.touchEnabled = false;
+    };
+    GameGlobal.gameStartHandler = function () {
+        console.log("开始游戏");
+    };
+    GameGlobal.gameOverHandler = function () {
+        console.log("游戏结束");
+    };
+    GameGlobal.isEnterGame = false;
+    GameGlobal.isEnterMap = false;
+    GameGlobal.curState = -1;
+    /**主题界面，选择游戏模式 */
+    GameGlobal.state_gameWait = 1;
+    /**进入某游戏模式，准备开始游戏 */
+    GameGlobal.state_gameReady = 2;
+    /**游戏进行中 */
+    GameGlobal.state_gamePlaying = 3;
+    /**游戏结束，分数结算 */
+    GameGlobal.state_gameOver = 4;
+    return GameGlobal;
+}());
+__reflect(GameGlobal.prototype, "GameGlobal");
+var BaseMgr = (function () {
+    function BaseMgr() {
+    }
+    return BaseMgr;
+}());
+__reflect(BaseMgr.prototype, "BaseMgr", ["IGameManager"]);
+var Mgr_Animation = (function () {
+    function Mgr_Animation() {
+    }
+    return Mgr_Animation;
+}());
+__reflect(Mgr_Animation.prototype, "Mgr_Animation");
+var Mgr_Event = (function () {
+    function Mgr_Event() {
+    }
+    return Mgr_Event;
+}());
+__reflect(Mgr_Event.prototype, "Mgr_Event");
+var Mgr_Page = (function () {
+    function Mgr_Page() {
+    }
+    return Mgr_Page;
+}());
+__reflect(Mgr_Page.prototype, "Mgr_Page");
 //////////////////////////////////////////////////////////////////////////////////////
 //
 //  Copyright (c) 2014-present, Egret Technology.
@@ -283,120 +416,73 @@ var Main = (function (_super) {
     return Main;
 }(egret.DisplayObjectContainer));
 __reflect(Main.prototype, "Main");
-var DebugPlatform = (function () {
-    function DebugPlatform() {
+var Page_Config = (function () {
+    function Page_Config() {
     }
-    DebugPlatform.prototype.getUserInfo = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, { nickName: "username" }];
-            });
-        });
-    };
-    DebugPlatform.prototype.login = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/];
-            });
-        });
-    };
-    return DebugPlatform;
+    return Page_Config;
 }());
-__reflect(DebugPlatform.prototype, "DebugPlatform", ["Platform"]);
-if (!window.platform) {
-    window.platform = new DebugPlatform();
-}
-var GameGlobal = (function () {
-    function GameGlobal() {
+__reflect(Page_Config.prototype, "Page_Config");
+var Page_GameOver = (function () {
+    function Page_GameOver() {
     }
-    GameGlobal.init = function (main) {
-        if (main) {
-            GameGlobal.mainLayer = main;
-        }
-        GameGlobal.curState = GameGlobal.state_gameWait;
-        GameGlobal.pageMap = {};
-    };
-    GameGlobal.register = function (key, page) {
-        if (!GameGlobal.pageMap[key]) {
-            GameGlobal.pageMap[key] = page;
-        }
-    };
-    GameGlobal.update = function () {
-        // if (GameGlobal.curState == GameGlobal.state_gameWait) {
-        // 	GameGlobal.mainLayer.addChild(GameGlobal.page_main);
-        // } else if (GameGlobal.curState == GameGlobal.state_gameReady) {
-        // 	GameGlobal.gdMgr.initData();
-        // 	GameGlobal.mainLayer.addChild(GameGlobal.page_ready);
-        // 	GameGlobal.page_ready.onOpenHandler();
-        // } else if (GameGlobal.curState == GameGlobal.state_gamePlaying) {
-        // } else if (GameGlobal.curState == GameGlobal.state_gameOver) {
-        // 	GameGlobal.mainLayer.addChild(GameGlobal.page_over);
-        // 	GameGlobal.page_over.onOpenHandler();
-        // }
-    };
-    GameGlobal.activateReadyPage = function () {
-        // GameGlobal.page_ready.touchChildren = true;
-        // GameGlobal.page_ready.touchEnabled = true;
-    };
-    GameGlobal.disableReadyPage = function () {
-        // GameGlobal.page_ready.touchChildren = false;
-        // GameGlobal.page_ready.touchEnabled = false;
-    };
-    GameGlobal.gameStartHandler = function () {
-        console.log("开始游戏");
-    };
-    GameGlobal.gameOverHandler = function () {
-        console.log("游戏结束");
-    };
-    GameGlobal.isEnterGame = false;
-    GameGlobal.isEnterMap = false;
-    GameGlobal.curState = -1;
-    /**主题界面，选择游戏模式 */
-    GameGlobal.state_gameWait = 1;
-    /**进入某游戏模式，准备开始游戏 */
-    GameGlobal.state_gameReady = 2;
-    /**游戏进行中 */
-    GameGlobal.state_gamePlaying = 3;
-    /**游戏结束，分数结算 */
-    GameGlobal.state_gameOver = 4;
-    return GameGlobal;
+    return Page_GameOver;
 }());
-__reflect(GameGlobal.prototype, "GameGlobal");
-var IGamePage = (function () {
-    function IGamePage() {
+__reflect(Page_GameOver.prototype, "Page_GameOver");
+var Page_Rank = (function () {
+    function Page_Rank() {
     }
-    return IGamePage;
+    return Page_Rank;
 }());
-__reflect(IGamePage.prototype, "IGamePage");
-var IGameDataMgr = (function () {
-    function IGameDataMgr() {
+__reflect(Page_Rank.prototype, "Page_Rank");
+var Page_Welcome = (function () {
+    function Page_Welcome() {
     }
-    return IGameDataMgr;
+    return Page_Welcome;
 }());
-__reflect(IGameDataMgr.prototype, "IGameDataMgr");
-var BaseMoster = (function () {
-    function BaseMoster() {
-    }
-    return BaseMoster;
-}());
-__reflect(BaseMoster.prototype, "BaseMoster");
-var GunMan = (function () {
-    function GunMan() {
-    }
-    return GunMan;
-}());
-__reflect(GunMan.prototype, "GunMan");
-var BasePage = (function () {
-    function BasePage() {
-    }
-    return BasePage;
-}());
-__reflect(BasePage.prototype, "BasePage");
-var Page_Battle_PVE = (function () {
+__reflect(Page_Welcome.prototype, "Page_Welcome");
+var Page_Battle_PVE = (function (_super) {
+    __extends(Page_Battle_PVE, _super);
     function Page_Battle_PVE() {
+        return _super.call(this) || this;
     }
     return Page_Battle_PVE;
-}());
+}(BasePage));
 __reflect(Page_Battle_PVE.prototype, "Page_Battle_PVE");
+var Page_Battle_PVP = (function () {
+    function Page_Battle_PVP() {
+    }
+    return Page_Battle_PVP;
+}());
+__reflect(Page_Battle_PVP.prototype, "Page_Battle_PVP");
+var BaseVo = (function () {
+    function BaseVo() {
+    }
+    return BaseVo;
+}());
+__reflect(BaseVo.prototype, "BaseVo");
+var Vo_MonsterAttr = (function () {
+    function Vo_MonsterAttr() {
+    }
+    return Vo_MonsterAttr;
+}());
+__reflect(Vo_MonsterAttr.prototype, "Vo_MonsterAttr");
+var Vo_Node = (function () {
+    function Vo_Node() {
+    }
+    return Vo_Node;
+}());
+__reflect(Vo_Node.prototype, "Vo_Node");
+var Vo_Player = (function () {
+    function Vo_Player() {
+    }
+    return Vo_Player;
+}());
+__reflect(Vo_Player.prototype, "Vo_Player");
+var Vo_Weapon = (function () {
+    function Vo_Weapon() {
+    }
+    return Vo_Weapon;
+}());
+__reflect(Vo_Weapon.prototype, "Vo_Weapon");
 
 ;window.Main = Main;
